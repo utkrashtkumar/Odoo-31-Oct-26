@@ -68,7 +68,7 @@ export default function SignInPage() {
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        {/* Odoo Style App Badge */}
+        {/* Brand App Badge */}
         <div className="w-12 h-12 bg-odoo-purple text-white font-bold rounded-2xl flex items-center justify-center text-xl mx-auto shadow-md">
           B
         </div>
@@ -76,7 +76,7 @@ export default function SignInPage() {
           Sign in to Brightloop
         </h2>
         <p className="mt-1 text-xs text-gray-500">
-          Supabase Cloud Authentication • Odoo 17+ Enterprise
+          Secure Enterprise Authentication
         </p>
       </div>
 
@@ -139,10 +139,10 @@ export default function SignInPage() {
             </button>
           </form>
 
-          {/* Quick Demo Role Logins (PDF Spec: Admin, Staff, Customer) */}
+          {/* Quick Demo Role Logins */}
           <div className="border-t border-gray-100 pt-5">
             <span className="block text-[11px] font-bold text-gray-400 uppercase tracking-wider text-center mb-3">
-              Fast 1-Click Role Logins (PDF Roles)
+              Fast 1-Click Role Switcher
             </span>
             <div className="grid grid-cols-3 gap-2">
               <button
@@ -177,7 +177,7 @@ export default function SignInPage() {
             <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg text-xs space-y-3 animate-in fade-in">
               <span className="font-bold text-gray-900 block">Password Reset Link</span>
               <p className="text-gray-500 text-[11px]">
-                PDF Specification: If they forget it later, a reset link should arrive at their registered email.
+                Enter your registered email address to receive password reset instructions.
               </p>
               {forgotMsg ? (
                 <div className="text-emerald-700 bg-emerald-50 p-2 rounded text-[11px] font-semibold border border-emerald-200">
@@ -215,3 +215,4 @@ export default function SignInPage() {
     </div>
   );
 }
+

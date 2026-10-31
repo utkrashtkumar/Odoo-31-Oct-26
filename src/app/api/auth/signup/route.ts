@@ -12,14 +12,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    // PDF Requirement Validation:
+    // Password complexity policy validation:
     // "the password must be more than eight characters, with an uppercase letter, a lowercase letter and a special character"
     const validation = validatePassword(password);
     if (!validation.isValid) {
       return NextResponse.json({ success: false, error: validation.message }, { status: 400 });
     }
 
-    // Call Supabase Auth Admin to create the user
+    // Call authentication backend to create the user
     const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
       email: email.trim().toLowerCase(),
       password,
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     });
 
     if (authError) {
-      // PDF Rule: "Each email can belong to only one account"
+      // Account uniqueness rule: "Each email can belong to only one account"
       if (authError.message.toLowerCase().includes("already registered") || authError.message.toLowerCase().includes("unique")) {
         return NextResponse.json({ success: false, error: "An account with this email already exists." }, { status: 409 });
       }
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     const userId = authData.user.id;
     const userRole = "customer";
 
-    // Try to record in Supabase profiles table
+    // Record in profiles table
     try {
       await supabaseAdmin.from("profiles").upsert({
         id: userId,
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
 
     const response = NextResponse.json({
       success: true,
-      message: "Customer account created successfully in Supabase.",
+      message: "Customer account created successfully.",
       user: {
         id: userId,
         email: email.trim().toLowerCase(),
@@ -98,3 +98,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
+

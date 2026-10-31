@@ -80,7 +80,7 @@ export function Chatter({
         </div>
 
         <span className="text-[11px] text-gray-500 font-mono">
-          Odoo Chatter • Realtime Stream
+          Activity Stream • Timeline
         </span>
       </div>
 

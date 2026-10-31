@@ -27,7 +27,7 @@ export function formatDate(date: string | Date | null | undefined, formatString 
   }
 }
 
-// PDF Mandated Overdue Aging Categorization
+// Overdue Aging Categorization
 export function getAgingBucket(dueDate: string | Date, isPaid = false): {
   bucket: "current" | "1-15" | "16-30" | "30+";
   daysPastDue: number;
@@ -81,7 +81,7 @@ export function getAgingBucket(dueDate: string | Date, isPaid = false): {
   }
 }
 
-// PDF Mandated Password Complexity Validator:
+// Standard Password Complexity Validator:
 // "> 8 characters, with an uppercase letter, a lowercase letter and a special character"
 export function validatePassword(password: string): { isValid: boolean; message?: string } {
   if (!password || password.length <= 8) {

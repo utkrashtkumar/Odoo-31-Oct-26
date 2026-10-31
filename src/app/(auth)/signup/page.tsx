@@ -17,7 +17,7 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Real-time password validation matching PDF specification:
+  // Real-time password validation policy:
   // "more than eight characters, with an uppercase letter, a lowercase letter and a special character"
   const hasMinLength = password.length > 8;
   const hasUpperCase = /[A-Z]/.test(password);
@@ -50,7 +50,7 @@ export default function SignUpPage() {
         router.push("/portal");
       }
     } catch {
-      setErrorMsg("Network error connecting to Supabase Auth.");
+      setErrorMsg("Network error connecting to authentication service.");
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +59,7 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        {/* Odoo Style App Logo */}
+        {/* Brand App Logo */}
         <div className="w-12 h-12 bg-odoo-purple text-white font-bold rounded-2xl flex items-center justify-center text-xl mx-auto shadow-md">
           B
         </div>
@@ -67,7 +67,7 @@ export default function SignUpPage() {
           Create Brightloop Account
         </h2>
         <p className="mt-1 text-xs text-gray-500">
-          PDF Scenario: A new customer signs up to manage subscriptions online
+          Create a business account to manage your subscriptions online
         </p>
       </div>
 
@@ -146,10 +146,10 @@ export default function SignUpPage() {
               </div>
             </div>
 
-            {/* Real-time PDF Password Complexity Checklist */}
+            {/* Real-time Password Complexity Checklist */}
             <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg space-y-1.5 text-[11px]">
               <span className="font-bold text-gray-700 block text-[10px] uppercase tracking-wider">
-                PDF Password Policy Requirements:
+                Password Requirements:
               </span>
               <div className="flex items-center space-x-1.5">
                 {hasMinLength ? (
@@ -201,7 +201,7 @@ export default function SignUpPage() {
               disabled={isLoading || !isPasswordValid}
               className="w-full bg-odoo-purple hover:bg-odoo-purple-dark disabled:opacity-50 text-white font-bold py-2.5 px-4 rounded-lg shadow-sm transition active:scale-95 flex items-center justify-center space-x-2 text-xs"
             >
-              <span>{isLoading ? "Creating Account in Supabase..." : "Sign Up & Access Portal"}</span>
+              <span>{isLoading ? "Creating Account..." : "Sign Up & Access Portal"}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
@@ -217,3 +217,4 @@ export default function SignUpPage() {
     </div>
   );
 }
+

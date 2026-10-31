@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
     const cleanEmail = email.trim().toLowerCase();
 
-    // Call Supabase Auth to generate/send reset link
+    // Call authentication service to generate/send reset link
     try {
       const { data, error } = await supabaseAdmin.auth.admin.generateLink({
         type: "recovery",
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       });
 
       if (error) {
-        // If user not in Supabase Auth yet, return simulated success for security
+        // If user not in authentication database yet, return simulated success for security
         return NextResponse.json({
           success: true,
           message: `If an account with ${cleanEmail} exists, a password reset link has been dispatched to your inbox.`,
@@ -43,3 +43,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
+

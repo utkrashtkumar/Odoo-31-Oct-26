@@ -8,7 +8,7 @@ export default function HomePage() {
   const apps = [
     {
       title: "Subscriptions Pipeline",
-      desc: "Manage quotes, active contracts, auto-close rules, and Odoo brand variants.",
+      desc: "Manage quotes, active contracts, auto-close rules, and brand editions.",
       href: "/subscriptions",
       icon: FileText,
       badge: "Pipeline Engine",
@@ -32,15 +32,15 @@ export default function HomePage() {
     },
     {
       title: "Customer Self-Service Portal",
-      desc: "Direct self-service hub matching odoo.com for clients to manage subscriptions.",
+      desc: "Direct self-service hub for clients to view contracts, toggle add-ons, and pay bills.",
       href: "/portal",
       icon: ExternalLink,
-      badge: "Odoo.com Theme",
+      badge: "Self-Service",
       color: "bg-slate-700",
     },
     {
       title: "Products & Brand Variants",
-      desc: "Catalog with cost/sales pricing and Odoo Enterprise Edition (+$560 surcharge).",
+      desc: "Catalog with cost/sales pricing and Enterprise Edition (+$560 surcharge).",
       href: "/products",
       icon: Package,
       badge: "Variant Matrix",
@@ -83,7 +83,7 @@ export default function HomePage() {
             </div>
             <span className="font-bold text-lg tracking-tight">Brightloop Software</span>
             <span className="text-xs bg-black/20 text-odoo-purple-subtle px-2 py-0.5 rounded font-mono">
-              Odoo 17+ Enterprise Edition
+              Enterprise Edition
             </span>
           </div>
 
@@ -107,8 +107,7 @@ export default function HomePage() {
           The digital backbone of recurring revenue for Brightloop Software
         </h1>
         <p className="text-sm text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Inspired by the Odoo Enterprise ecosystem and backed by Supabase Cloud. Built strictly according to the specifications in{" "}
-          <strong className="text-gray-900">Subscription_Management_System.pdf</strong>.
+          Enterprise recurring billing, automated invoicing, real-time revenue analytics, and self-service customer portal.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -169,9 +168,8 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="border-t border-gray-200 py-6 text-center text-xs text-gray-400 bg-white">
-        <p>Brightloop Subscription Management System • Odoo ERP & Supabase Cloud Integration</p>
+        <p>Brightloop Subscription Management System • Enterprise Billing & Invoicing</p>
       </footer>
     </div>
   );
 }
-

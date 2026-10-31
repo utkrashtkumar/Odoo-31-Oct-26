@@ -200,7 +200,7 @@ export default function FinanceDashboardPage() {
                 </span>
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
-                PDF Specification: Chase overdue invoices before they turn into lost revenue.
+                Chase overdue receivables before they impact cash flow.
               </p>
             </div>
 

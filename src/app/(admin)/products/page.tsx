@@ -20,7 +20,7 @@ export default function ProductsPage() {
   const [salesPrice, setSalesPrice] = useState("120.00");
   const [costPrice, setCostPrice] = useState("35.00");
   const [variantName, setVariantName] = useState("Brand Edition");
-  const [variantValue, setVariantValue] = useState("Odoo Enterprise Edition");
+  const [variantValue, setVariantValue] = useState("Enterprise Edition");
   const [variantSurcharge, setVariantSurcharge] = useState("560.00");
   const [notes, setNotes] = useState("");
 
@@ -80,7 +80,7 @@ export default function ProductsPage() {
                 <span>Product Catalog & Variant Matrix</span>
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
-                PDF Requirement: Manage name, type, sales price, cost price, notes, and variants (e.g. Odoo brand adds +$560).
+                Manage product catalog, sales prices, cost prices, internal notes, and brand variant surcharges.
               </p>
             </div>
             <span className="text-xs font-semibold text-odoo-purple bg-odoo-purple-subtle px-2.5 py-1 rounded border border-odoo-purple/20">
@@ -158,7 +158,7 @@ export default function ProductsPage() {
             <div className="flex items-center justify-between px-5 py-3.5 bg-gray-50 border-b border-odoo-border">
               <h3 className="text-sm font-bold text-gray-900 flex items-center space-x-2">
                 <Plus className="w-4 h-4 text-odoo-purple" />
-                <span>Launch New Product / Variant (PDF Spec)</span>
+                <span>Launch New Product / Variant</span>
               </h3>
               <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-600">
                 <X className="w-4 h-4" />
@@ -214,7 +214,7 @@ export default function ProductsPage() {
                 </div>
               </div>
 
-              {/* Variant Specification (PDF Rule: Odoo brand adds +560) */}
+              {/* Variant Specification (Enterprise brand surcharge) */}
               <div className="bg-odoo-purple-subtle/50 p-3 rounded border border-odoo-purple/20 space-y-2">
                 <span className="font-bold text-[11px] text-odoo-purple-dark uppercase tracking-wider block">
                   Product Variant (e.g. Brand Edition Surcharge)
@@ -229,7 +229,7 @@ export default function ProductsPage() {
                   />
                   <input
                     type="text"
-                    placeholder="Value (e.g. Odoo Edition)"
+                    placeholder="Value (e.g. Enterprise Edition)"
                     value={variantValue}
                     onChange={(e) => setVariantValue(e.target.value)}
                     className="p-1.5 border border-odoo-border rounded bg-white text-xs"

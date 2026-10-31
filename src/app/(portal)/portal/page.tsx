@@ -22,7 +22,7 @@ export default function CustomerPortalPage() {
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#212529]">
-      {/* Odoo.com styled Public Customer Portal Header */}
+      {/* Customer Portal Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-xs">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-3">
@@ -68,7 +68,7 @@ export default function CustomerPortalPage() {
               Welcome back, {customer.company}
             </h1>
             <p className="text-xs text-white/80 mt-1 max-w-xl">
-              PDF Specification: Manage your active subscriptions, review renewal dates, switch add-ons, and download invoices directly without waiting for support.
+              Manage your active subscriptions, review renewal dates, switch add-ons, and download invoices directly without waiting for support.
             </p>
           </div>
 
@@ -107,7 +107,7 @@ export default function CustomerPortalPage() {
                         {sub.status}
                       </span>
                       <span className="text-xs bg-purple-50 text-odoo-purple font-semibold px-2 py-0.5 rounded border border-purple-200">
-                        Odoo Brand Edition Included
+                        Enterprise Edition Included
                       </span>
                     </div>
                     <div className="text-xs text-gray-600 font-medium">
@@ -150,7 +150,7 @@ export default function CustomerPortalPage() {
                 <span>Invoices & Payment Receipts</span>
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
-                Download official PDF tax invoices and review payment confirmations.
+                Download official tax invoices and review payment confirmations.
               </p>
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function CustomerPortalPage() {
                           className="inline-flex items-center space-x-1 text-xs font-semibold text-odoo-purple hover:underline"
                         >
                           <Download className="w-3.5 h-3.5" />
-                          <span>View PDF</span>
+                          <span>Download Invoice</span>
                         </Link>
                       </td>
                     </tr>
@@ -211,7 +211,7 @@ export default function CustomerPortalPage() {
 
       {/* Portal Footer */}
       <footer className="border-t border-gray-200 mt-16 py-6 text-center text-xs text-gray-400">
-        <p>Powered by Brightloop Software • Built with Supabase & Odoo Design System</p>
+        <p>Powered by Brightloop Software • All rights reserved.</p>
       </footer>
     </div>
   );

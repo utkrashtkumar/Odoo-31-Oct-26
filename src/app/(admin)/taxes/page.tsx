@@ -30,7 +30,7 @@ export default function TaxesPage() {
                 <span>Automated Tax Rules & Rate Engine</span>
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
-                PDF Spec: Taxes are calculated automatically on billing day from rules configured by admin.
+                Taxes are calculated automatically on billing day from rules configured by admin.
               </p>
             </div>
             <span className="text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-1 rounded border border-amber-200">

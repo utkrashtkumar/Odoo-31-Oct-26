@@ -97,7 +97,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
       />
 
       <main className="max-w-5xl mx-auto px-4 py-6">
-        {/* Odoo Top Action Bar & Pipeline */}
+        {/* Top Action Bar & Pipeline */}
         <div className="bg-white p-3 rounded-t-lg border border-odoo-border border-b-0 flex flex-wrap items-center justify-between gap-3 shadow-xs">
           {/* Action Buttons */}
           <div className="flex items-center space-x-2">
@@ -126,12 +126,12 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
               className="bg-white border border-odoo-border hover:bg-gray-50 text-gray-700 text-xs font-medium px-3 py-1.5 rounded shadow-xs transition flex items-center space-x-1"
             >
               <Printer className="w-3.5 h-3.5 text-gray-500" />
-              <span>Print (PDF)</span>
+              <span>Print / Download</span>
             </button>
 
             <button
               onClick={() => {
-                alert(`Invoice ${inv.invoice_number} sent to registered customer email with PDF attachment.`);
+                alert(`Invoice ${inv.invoice_number} sent to registered customer email.`);
               }}
               className="bg-white border border-odoo-border hover:bg-gray-50 text-gray-700 text-xs font-medium px-3 py-1.5 rounded shadow-xs transition flex items-center space-x-1"
             >
@@ -156,7 +156,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
             </Link>
           </div>
 
-          {/* Odoo Chevron Status Pipeline (Top Right) */}
+          {/* Chevron Status Pipeline (Top Right) */}
           <StatusPipeline
             stages={stages}
             currentStage={currentStatus}
@@ -164,7 +164,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
           />
         </div>
 
-        {/* Odoo Form Sheet Container (Looks like an authentic invoice) */}
+        {/* Form Sheet Container */}
         <div className="odoo-sheet rounded-b-lg p-6 sm:p-8 space-y-6">
           {/* Header Title with Number & Status Badge */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-odoo-border gap-2">
@@ -246,7 +246,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
                   <td className="px-4 py-3">
                     <div className="font-bold text-gray-900">Brightloop Core ERP License</div>
                     <div className="text-[11px] text-odoo-purple font-semibold">
-                      Variant: Brand Edition = Odoo Enterprise Edition (+$560 Surcharge)
+                      Variant: Brand Edition = Enterprise Edition (+$560 Surcharge)
                     </div>
                   </td>
                   <td className="px-4 py-3 text-center font-bold">5</td>
@@ -292,7 +292,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
             </div>
           </div>
 
-          {/* Recorded Payments Ledger (PDF Requirement: Match payments by method, amount, date & note) */}
+          {/* Recorded Payments Ledger */}
           <div className="border border-odoo-border rounded-lg overflow-hidden bg-gray-50/50">
             <div className="px-4 py-2 border-b border-odoo-border font-bold text-xs text-gray-700 flex items-center justify-between">
               <span>Reconciled Payments Ledger</span>
@@ -337,7 +337,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
           </div>
         </div>
 
-        {/* Odoo Chatter Component */}
+        {/* Activity & Chatter Component */}
         <Chatter
           entityType="invoice"
           entityId={inv.id}
@@ -345,7 +345,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
         />
       </main>
 
-      {/* Register Payment Modal (PDF Specification) */}
+      {/* Register Payment Modal */}
       {isPaymentModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-lg shadow-2xl max-w-md w-full border border-odoo-border overflow-hidden animate-in fade-in duration-150">

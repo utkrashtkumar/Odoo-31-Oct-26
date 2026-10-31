@@ -75,7 +75,7 @@ export default function DiscountsPage() {
                 <span>Admin Discount Rules & Automated Deductions</span>
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
-                PDF Spec: Admin-only rules. Auto-applies to next invoice; auto-stops when expired or usage limit is reached.
+                Admin-governed discount rules. Auto-applies to eligible invoices; auto-stops when expired or usage limit is reached.
               </p>
             </div>
             <div className="flex items-center space-x-1.5 text-xs text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200">

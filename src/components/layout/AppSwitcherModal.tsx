@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { 
   FileText, CreditCard, Package, Layers, 
-  Percent, ShieldCheck, BarChart3, Users, X, ExternalLink
+  Percent, ShieldCheck, BarChart3, Users, X
 } from "lucide-react";
 
 interface AppSwitcherModalProps {
@@ -41,7 +41,7 @@ export function AppSwitcherModal({ isOpen, onClose }: AppSwitcherModalProps) {
           </div>
           <div>
             <h2 className="text-xl font-bold tracking-tight">Brightloop Enterprise Apps</h2>
-            <p className="text-xs text-white/50">Odoo 17+ Unified Subscription System</p>
+            <p className="text-xs text-white/50">Unified Subscription & Billing System</p>
           </div>
         </div>
 
@@ -70,19 +70,10 @@ export function AppSwitcherModal({ isOpen, onClose }: AppSwitcherModalProps) {
         </div>
 
         <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-white/60">
-          <span>Connected to Supabase Cloud (`gwrcsmbibwbgysggoixp`)</span>
-          <a 
-            href="https://www.odoo.com" 
-            target="_blank" 
-            rel="noreferrer" 
-            className="flex items-center space-x-1 text-odoo-teal hover:underline"
-          >
-            <span>Odoo Reference Design</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
+          <span>Brightloop Software Platform</span>
+          <span>Version 1.0</span>
         </div>
       </div>
     </div>
   );
 }
-

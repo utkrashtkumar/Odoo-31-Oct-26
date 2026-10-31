@@ -56,7 +56,7 @@ export default function SubscriptionsPage() {
 
       <main className="max-w-7xl mx-auto px-4 py-6">
         {view === "list" ? (
-          /* Odoo Table / Tree View */
+          /* Table / Tree View */
           <div className="bg-white rounded-lg border border-odoo-border shadow-xs overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left">
@@ -125,7 +125,7 @@ export default function SubscriptionsPage() {
             </div>
           </div>
         ) : (
-          /* Odoo Kanban View */
+          /* Kanban View */
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {(["quotation", "confirmed", "active"] as const).map((colStatus) => {
               const colSubs = filteredSubs.filter((s) => s.status === colStatus);

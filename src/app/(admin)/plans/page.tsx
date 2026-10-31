@@ -40,7 +40,7 @@ export default function PlansPage() {
                 <span>Subscription Plans & Lifecycle Governance</span>
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
-                PDF Spec: Daily/weekly/monthly/yearly frequency, minimum quantity, and plan-by-plan closure rules.
+                Daily, weekly, monthly, and yearly frequency with plan-by-plan closure rules.
               </p>
             </div>
             <span className="text-xs font-semibold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded border border-indigo-200">

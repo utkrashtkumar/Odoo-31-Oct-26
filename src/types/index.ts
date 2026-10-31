@@ -31,7 +31,7 @@ export interface ProductVariant {
   id: string;
   product_id: string;
   attribute_name: string; // e.g. "Brand"
-  attribute_value: string; // e.g. "Odoo"
+  attribute_value: string; // e.g. "Enterprise Edition"
   price_surcharge: number; // e.g. 560
 }
 

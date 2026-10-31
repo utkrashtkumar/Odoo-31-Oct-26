@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { 
-  LayoutGrid, Search, PlayCircle, UserCheck, 
+  LayoutGrid, Search, PlayCircle, 
   LogOut, LogIn, UserPlus 
 } from "lucide-react";
 import { AppSwitcherModal } from "./AppSwitcherModal";
@@ -40,12 +40,12 @@ export function Navbar({ currentApp = "Subscriptions" }: NavbarProps) {
     <>
       <header className="bg-odoo-purple text-white shadow-sm border-b border-black/10 select-none sticky top-0 z-40">
         <div className="flex items-center justify-between px-3 h-12">
-          {/* Left: Odoo 9-Dot Waffle Menu & App Name */}
+          {/* Left: App Launcher & Title */}
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setIsSwitcherOpen(true)}
               className="p-1.5 rounded hover:bg-black/15 transition text-white/90 hover:text-white flex items-center justify-center focus:outline-none"
-              title="Open Odoo App Launcher"
+              title="Open App Launcher"
             >
               <LayoutGrid className="w-5 h-5" />
             </button>
@@ -93,7 +93,7 @@ export function Navbar({ currentApp = "Subscriptions" }: NavbarProps) {
 
           {/* Right: Auth Profile & Role Switcher */}
           <div className="flex items-center space-x-2.5 text-xs">
-            {/* Quick Role Toggle (PDF Rule: Admin controls all, Staff limited, Customer portal) */}
+            {/* Quick Role Toggle */}
             <div className="hidden lg:flex items-center bg-black/25 rounded-md p-0.5 border border-white/10">
               <span className="text-[10px] text-white/60 px-1.5">Role:</span>
               <button
@@ -136,7 +136,7 @@ export function Navbar({ currentApp = "Subscriptions" }: NavbarProps) {
                 <button
                   onClick={signOut}
                   className="p-1 text-white/70 hover:text-white hover:bg-black/20 rounded transition"
-                  title="Sign out of Supabase"
+                  title="Sign out"
                 >
                   <LogOut className="w-4 h-4" />
                 </button>

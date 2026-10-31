@@ -70,7 +70,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
       />
 
       <main className="max-w-5xl mx-auto px-4 py-6">
-        {/* Odoo Form Action Bar & Pipeline Stage Bar */}
+        {/* Form Action Bar & Pipeline Stage Bar */}
         <div className="bg-white p-3 rounded-t-lg border border-odoo-border border-b-0 flex flex-wrap items-center justify-between gap-3 shadow-xs">
           {/* Action Buttons */}
           <div className="flex items-center space-x-2">
@@ -153,7 +153,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
             </Link>
           </div>
 
-          {/* Odoo Chevron Status Pipeline (Top Right) */}
+          {/* Chevron Status Pipeline (Top Right) */}
           <StatusPipeline
             stages={stages}
             currentStage={currentStatus}
@@ -161,7 +161,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
           />
         </div>
 
-        {/* Odoo Form Sheet Container */}
+        {/* Form Sheet Container */}
         <div className="odoo-sheet rounded-b-lg p-6 sm:p-8 space-y-6">
           {/* Header Title with Number & Health Gauge */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-odoo-border gap-2">
@@ -182,7 +182,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
             </div>
           </div>
 
-          {/* Field Details Grid (PDF Specification) */}
+          {/* Field Details Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs">
             <div className="space-y-3">
               <div className="flex items-center">
@@ -219,7 +219,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
             </div>
           </div>
 
-          {/* Add-on Switchboard Section (PDF: "add-ons customers switch on and off") */}
+          {/* Add-on Switchboard Section */}
           <div className="bg-odoo-purple-subtle/50 border border-odoo-purple/20 p-4 rounded-lg flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <ShieldCheck className="w-5 h-5 text-odoo-purple" />
@@ -251,7 +251,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
             </button>
           </div>
 
-          {/* Subscription Line Items Table (PDF Requirement) */}
+          {/* Subscription Line Items Table */}
           <div className="border border-odoo-border rounded-lg overflow-hidden">
             <div className="bg-gray-100/70 px-4 py-2 border-b border-odoo-border font-bold text-xs text-gray-700">
               Contract Lines & Product Variants
@@ -271,7 +271,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
                   <td className="px-4 py-3">
                     <div className="font-bold text-gray-900">Brightloop Core ERP License</div>
                     <div className="text-[11px] text-odoo-purple font-semibold">
-                      Variant: Brand Edition = Odoo Enterprise Edition (+$560 Surcharge)
+                      Variant: Brand Edition = Enterprise Edition (+$560 Surcharge)
                     </div>
                   </td>
                   <td className="px-4 py-3 text-center font-bold">5</td>
@@ -315,7 +315,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
           </div>
         </div>
 
-        {/* Odoo Chatter Component */}
+        {/* Activity & Chatter Component */}
         <Chatter
           entityType="subscription"
           entityId={sub.id}

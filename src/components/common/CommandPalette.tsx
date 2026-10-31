@@ -82,7 +82,7 @@ export function CommandPalette() {
                 className="flex items-center space-x-2.5 px-3 py-2 rounded-lg hover:bg-odoo-purple/10 hover:text-odoo-purple cursor-pointer transition text-gray-700"
               >
                 <Package className="w-4 h-4 text-blue-500" />
-                <span>Products & Brand Variants (Odoo +$560)</span>
+                <span>Products & Brand Variants (+$560)</span>
               </Command.Item>
 
               <Command.Item

@@ -90,7 +90,7 @@ export function ControlPanel({
           {/* Custom page-specific actions */}
           {customActions}
 
-          {/* Search Input with Odoo-style magnifying glass */}
+          {/* Search Input with magnifying glass */}
           {onSearchChange && (
             <div className="relative">
               <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -124,7 +124,7 @@ export function ControlPanel({
             </div>
           )}
 
-          {/* Odoo View Switcher (List vs Kanban vs Graph) */}
+          {/* View Switcher (List vs Kanban vs Graph) */}
           {onViewChange && (
             <div className="flex items-center space-x-0.5 bg-gray-100 p-0.5 rounded border border-odoo-border">
               <button

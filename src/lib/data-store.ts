@@ -4,9 +4,8 @@ import {
 } from "@/types";
 import { supabaseAdmin } from "./supabase/admin";
 
-// Demo Initial Data strictly reflecting Subscription_Management_System.pdf:
-// "Brightloop Software sells everything on subscription: business software billed by month/year, 
-// add-ons customers switch on and off, and a few products in variants (e.g. brand: Odoo +560)"
+// Demo Initial Data for Brightloop Software Subscription Platform:
+// Core software licenses, configurable add-ons, and product variants with surcharges.
 
 export const initialProfiles: Profile[] = [
   {
@@ -56,7 +55,7 @@ export const initialProducts: Product[] = [
     is_active: true,
     variants: [
       { id: "var-01", product_id: "prod-01", attribute_name: "Brand Edition", attribute_value: "Standard Edition", price_surcharge: 0 },
-      { id: "var-02", product_id: "prod-01", attribute_name: "Brand Edition", attribute_value: "Odoo Enterprise Edition", price_surcharge: 560.00 }, // PDF Requirement!
+      { id: "var-02", product_id: "prod-01", attribute_name: "Brand Edition", attribute_value: "Enterprise Edition", price_surcharge: 560.00 },
     ],
   },
   {
@@ -65,7 +64,7 @@ export const initialProducts: Product[] = [
     type: "add_on",
     sales_price: 49.00,
     cost_price: 10.00,
-    notes: "Automated recurring invoice generation, PDF downloads, and payments.",
+    notes: "Automated recurring invoice generation, digital downloads, and payments.",
     is_active: true,
   },
   {
@@ -103,7 +102,7 @@ export const initialPlans: Plan[] = [
     min_quantity: 5,
     valid_from: "2026-01-01",
     valid_until: "2029-12-31",
-    auto_close: true, // PDF: "Some plans should close on their own when they end"
+    auto_close: true, // Closes automatically when end date is reached
     allow_pause: false,
     allow_early_close: false,
     allow_renew: true,
@@ -132,14 +131,14 @@ export const initialQuotationTemplates: QuotationTemplate[] = [
     id: "tpl-01",
     name: "Standard Enterprise Software Package (30 Days Validity)",
     plan_id: "plan-yearly-ent",
-    validity_days: 30, // PDF Requirement: stays valid for a set number of days
+    validity_days: 30, // Stays valid for set number of days
     notes: "Pre-configured offer for large enterprise clients.",
     items: [
       {
         id: "tpl-line-1",
         template_id: "tpl-01",
         product_id: "prod-01",
-        variant_id: "var-02", // Odoo Enterprise Edition (adds +560)
+        variant_id: "var-02", // Enterprise Edition (adds +560)
         quantity: 10,
         discount_rate: 0,
       },
@@ -205,7 +204,7 @@ export const initialSubscriptions: Subscription[] = [
     payment_terms: "Net 30 Days",
     health_score: 95,
     health_label: "healthy",
-    notes: "Enterprise contract for Acme Corp with Odoo brand variant.",
+    notes: "Enterprise contract for Acme Corp with Enterprise brand variant.",
     created_at: "2026-01-01T09:00:00Z",
     lines: [
       {
@@ -214,7 +213,7 @@ export const initialSubscriptions: Subscription[] = [
         product_id: "prod-01",
         variant_id: "var-02",
         quantity: 5,
-        unit_price: 680.00, // 120 base + 560 Odoo brand
+        unit_price: 680.00, // 120 base + 560 Enterprise brand
         tax_rate: 10.00,
         subtotal: 3400.00,
         total: 3740.00,
@@ -341,7 +340,7 @@ export const initialActivityLogs: ActivityLog[] = [
     entity_type: "subscription",
     entity_id: "sub-00101",
     action: "status_change",
-    message: "Subscription confirmed and activated with Odoo Brand Edition variant.",
+    message: "Subscription confirmed and activated with Enterprise Edition variant.",
     created_at: "2026-01-01T09:05:00Z",
   },
   {
@@ -354,7 +353,7 @@ export const initialActivityLogs: ActivityLog[] = [
   },
 ];
 
-// Helper to check live Supabase tables or fallback gracefully
+// Helper to check live database tables or fallback gracefully
 export async function fetchWithSupabaseFallback<T>(
   tableName: string,
   fallbackData: T[],

@@ -3,8 +3,8 @@ import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 
 export const metadata: Metadata = {
-  title: "Brightloop - Subscription Management System | Odoo Enterprise",
-  description: "Unified recurring billing, subscription management, and revenue platform powered by Supabase.",
+  title: "Brightloop - Subscription Management System",
+  description: "Unified recurring billing, subscription management, and revenue platform.",
 };
 
 export default function RootLayout({

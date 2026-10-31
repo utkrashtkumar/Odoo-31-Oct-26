@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     let userRole = matchedProfile ? matchedProfile.role : "customer";
     let companyName = matchedProfile?.company_name || "Brightloop Account";
 
-    // If not in demo list, verify with Supabase Auth
+    // If not in demo list, verify with authentication service
     if (!matchedProfile) {
       const { data: authData, error: authError } = await supabaseAdmin.auth.signInWithPassword({
         email: cleanEmail,
@@ -65,3 +65,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
+
