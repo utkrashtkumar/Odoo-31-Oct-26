@@ -4,14 +4,18 @@ import { useState } from "react";
 import Link from "next/link";
 import { 
   FileText, CreditCard, ShieldCheck, Download, 
-  ExternalLink, Sparkles, User, LogOut, BookOpen 
+  ExternalLink, Sparkles, User, LogOut, BookOpen, PenTool, CheckCircle2 
 } from "lucide-react";
 import { initialSubscriptions, initialInvoices } from "@/lib/data-store";
 import { formatMoney, formatDate, getAgingBucket } from "@/lib/utils";
 import { useAuth } from "@/lib/auth-context";
+import { ContractSignModal } from "@/components/portal/ContractSignModal";
 
 export default function CustomerPortalPage() {
   const { user, signOut } = useAuth();
+  const [isSignModalOpen, setIsSignModalOpen] = useState(false);
+  const [signSuccessMsg, setSignSuccessMsg] = useState<string | null>(null);
+
   const customer = {
     name: user?.name || "Marcus Sterling",
     company: user?.company || "Acme Enterprises Inc.",
@@ -19,8 +23,12 @@ export default function CustomerPortalPage() {
   };
 
   // Filter only this customer's records (Strict RLS Isolation!)
-  const mySubs = initialSubscriptions.filter((s) => s.customer_id === "u-cust-01");
+  const [subs, setSubs] = useState(initialSubscriptions);
+  const mySubs = subs.filter((s) => s.customer_id === "u-cust-01");
   const myInvoices = initialInvoices.filter((i) => i.customer_id === "u-cust-01");
+
+  const pendingQuotes = mySubs.filter((s) => s.status === "quotation" || s.status === "draft");
+  const activeSubs = mySubs.filter((s) => s.status === "active" || s.status === "confirmed");
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#212529]">
@@ -98,6 +106,52 @@ export default function CustomerPortalPage() {
           </div>
         </div>
 
+        {/* E-Sign Success Notification */}
+        {signSuccessMsg && (
+          <div className="bg-emerald-50 border border-emerald-300 p-4 rounded-xl flex items-center justify-between text-emerald-900 shadow-xs animate-in fade-in">
+            <div className="flex items-center space-x-3">
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+              <div>
+                <p className="text-xs font-bold">Contract Successfully E-Signed & Activated!</p>
+                <p className="text-xs text-emerald-700">{signSuccessMsg}</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setSignSuccessMsg(null)}
+              className="text-emerald-700 hover:text-emerald-900 text-xs font-semibold px-2 py-1"
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
+
+        {/* Pending Quotation / E-Sign Banner */}
+        {pendingQuotes.length > 0 && (
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 rounded-xl p-5 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center space-x-1">
+                  <Sparkles className="w-3 h-3 text-amber-600" />
+                  <span>Action Required</span>
+                </span>
+                <h3 className="text-sm font-bold text-gray-900">
+                  New Proposal Awaiting Your Electronic Signature
+                </h3>
+                <p className="text-xs text-gray-600 max-w-xl">
+                  Quotation offer #{pendingQuotes[0].subscription_number} is ready. Review agreement terms and execute a digital signature directly to activate services instantly.
+                </p>
+              </div>
+              <button
+                onClick={() => setIsSignModalOpen(true)}
+                className="bg-odoo-purple hover:bg-odoo-purple-dark text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-sm transition flex items-center justify-center space-x-2 shrink-0 cursor-pointer"
+              >
+                <PenTool className="w-4 h-4 text-amber-300" />
+                <span>✍️ Review & E-Sign Contract</span>
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Section 1: Active Subscriptions */}
         <div className="bg-white rounded-xl border border-gray-200 shadow-xs overflow-hidden">
           <div className="p-5 border-b border-gray-100 flex items-center justify-between">
@@ -113,7 +167,7 @@ export default function CustomerPortalPage() {
           </div>
 
           <div className="divide-y divide-gray-100">
-            {mySubs.map((sub) => {
+            {activeSubs.map((sub) => {
               const totalVal = sub.lines?.reduce((sum, l) => sum + l.total, 0) || 0;
               return (
                 <div key={sub.id} className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-gray-50/50 transition">
@@ -224,6 +278,32 @@ export default function CustomerPortalPage() {
             </table>
           </div>
         </div>
+
+        {/* Contract E-Sign Modal */}
+        {pendingQuotes.length > 0 && (
+          <ContractSignModal
+            isOpen={isSignModalOpen}
+            onClose={() => setIsSignModalOpen(false)}
+            subscriptionNumber={pendingQuotes[0].subscription_number}
+            customerName={customer.name}
+            companyName={customer.company}
+            totalAmount={pendingQuotes[0].lines?.reduce((sum, l) => sum + l.total, 0) || 264.0}
+            planName="Flexible Enterprise Add-On Contract"
+            onSignSuccess={(sig) => {
+              // Update state locally and in datastore
+              const targetId = pendingQuotes[0].id;
+              setSubs((prev) =>
+                prev.map((s) => (s.id === targetId ? { ...s, status: "confirmed" } : s))
+              );
+              const storeSub = initialSubscriptions.find((s) => s.id === targetId);
+              if (storeSub) storeSub.status = "confirmed";
+
+              setSignSuccessMsg(
+                `Legally verified & signed by ${sig.signerName} (${sig.signatureToken}). Subscription is now confirmed!`
+              );
+            }}
+          />
+        )}
       </main>
 
       {/* Portal Footer */}

@@ -12,9 +12,10 @@ import { formatMoney, formatDate } from "@/lib/utils";
 import { InvoiceStatus, PaymentMethod } from "@/types";
 import { 
   Check, Printer, Send, 
-  CreditCard, ShieldCheck, DollarSign, X
+  CreditCard, ShieldCheck, DollarSign, X, Zap 
 } from "lucide-react";
 import Decimal from "decimal.js";
+import { PaymentSandboxModal } from "@/components/invoices/PaymentSandboxModal";
 
 export default function InvoiceDetailPage({ params }: { params: { id: string } }) {
   const inv = initialInvoices.find((i) => i.id === params.id) || initialInvoices[0];
@@ -26,6 +27,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
 
   // Payment Modal state
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [isSandboxModalOpen, setIsSandboxModalOpen] = useState(false);
   const [paymentAmount, setPaymentAmount] = useState(inv.balance_due.toString());
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("bank_transfer");
   const [paymentNote, setPaymentNote] = useState("");
@@ -118,6 +120,17 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
               >
                 <CreditCard className="w-3.5 h-3.5" />
                 <span>Register Payment</span>
+              </button>
+            )}
+
+            {currentStatus === "confirmed" && balanceDue > 0 && (
+              <button
+                onClick={() => setIsSandboxModalOpen(true)}
+                className="bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold px-3 py-1.5 rounded shadow-xs transition flex items-center space-x-1"
+                title="Simulate Stripe/Adyen webhook scenarios: instant capture, 3DS OTP challenge, decline, or fraud trigger"
+              >
+                <Zap className="w-3.5 h-3.5 text-amber-300" />
+                <span>⚡ Gateway Sandbox</span>
               </button>
             )}
 
@@ -440,6 +453,44 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
           </div>
         </div>
       )}
+
+      {/* Payment Gateway Sandbox Modal */}
+      <PaymentSandboxModal
+        isOpen={isSandboxModalOpen}
+        onClose={() => setIsSandboxModalOpen(false)}
+        invoiceNumber={inv.invoice_number}
+        customerName="Marcus Sterling (Acme Enterprises)"
+        balanceDue={balanceDue}
+        onPaymentSuccess={(rec) => {
+          const newBal = new Decimal(balanceDue).minus(rec.amount);
+          const updatedBal = newBal.isNegative() ? 0 : newBal.toNumber();
+          const newPayment = {
+            id: `pay-sim-${Date.now()}`,
+            invoice_id: inv.id,
+            payment_method: "credit_card" as PaymentMethod,
+            amount: rec.amount,
+            payment_date: new Date().toISOString().split("T")[0],
+            transaction_reference: rec.transactionId,
+            notes: `Gateway Sandbox Simulation (${rec.scenario})`,
+          };
+          const updatedPayments = [...payments, newPayment];
+          setPayments(updatedPayments);
+          setBalanceDue(updatedBal);
+          inv.balance_due = updatedBal;
+          inv.payments = updatedPayments;
+          if (updatedBal === 0) {
+            setCurrentStatus("paid");
+            inv.status = "paid";
+          }
+          setIsSandboxModalOpen(false);
+          setStatusMsg(`Webhook Event: Charge ${rec.transactionId} captured successfully for ${formatMoney(rec.amount)}`);
+          setTimeout(() => setStatusMsg(null), 4000);
+        }}
+        onPaymentDeclined={(reason) => {
+          setStatusMsg(`Gateway Webhook Event: Charge Failed (${reason})`);
+          setTimeout(() => setStatusMsg(null), 5000);
+        }}
+      />
 
       <CommandPalette />
     </div>

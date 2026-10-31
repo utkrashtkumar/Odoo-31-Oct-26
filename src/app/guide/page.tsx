@@ -5,7 +5,8 @@ import Link from "next/link";
 import { 
   BookOpen, Play, CheckCircle2, ShieldCheck, UserCheck, 
   CreditCard, FileText, BarChart3, Package, ArrowRight, 
-  Sparkles, Layers, Zap, Clock, ExternalLink, HelpCircle 
+  Sparkles, Layers, Zap, Clock, ExternalLink, HelpCircle,
+  Calculator, PenTool, AlertTriangle 
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { useAuth } from "@/lib/auth-context";
@@ -21,6 +22,8 @@ export default function GuidePage() {
     { id: "invoicing", title: "4. Invoices & Payments", icon: CreditCard },
     { id: "dashboard", title: "5. Finance Executive KPI", icon: BarChart3 },
     { id: "portal", title: "6. Customer Self-Service", icon: ExternalLink },
+    { id: "proration_esign", title: "7. Proration & E-Signing", icon: PenTool },
+    { id: "sandbox_dunning", title: "8. Gateway & Dunning", icon: AlertTriangle },
   ];
 
   return (
@@ -455,6 +458,146 @@ export default function GuidePage() {
                 >
                   <span>Open Customer Portal</span>
                   <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* SECTION 7: SMART PRORATION & DIGITAL CONTRACT E-SIGN */}
+          {activeSection === "proration_esign" && (
+            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-xs space-y-6 animate-in fade-in">
+              <div>
+                <span className="text-xs font-bold text-odoo-purple uppercase tracking-wider bg-odoo-purple-subtle px-2.5 py-1 rounded-md">
+                  Chapter 7
+                </span>
+                <h2 className="text-2xl font-bold text-gray-900 mt-2">
+                  Smart Proration Engine & Digital Contract E-Sign
+                </h2>
+                <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed">
+                  Financial precision for mid-cycle seat adjustments and legally binding contract signatures.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl border border-purple-200 bg-purple-50/50 space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <Calculator className="w-4 h-4 text-odoo-purple" />
+                    <h3 className="font-bold text-sm text-gray-900">Arbitrary-Precision Proration</h3>
+                  </div>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Powered by <code className="bg-white px-1.5 py-0.5 rounded border border-purple-200 font-mono text-odoo-purple">decimal.js</code>, 
+                    mid-cycle add-on toggling or seat upgrades calculate daily fractions with zero floating-point drift:
+                  </p>
+                  <div className="bg-white p-2.5 rounded border border-purple-200 text-[11px] font-mono text-gray-700">
+                    Proration = (Monthly Price / Billing Days) × Remaining Days
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-teal-200 bg-teal-50/50 space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <PenTool className="w-4 h-4 text-odoo-teal" />
+                    <h3 className="font-bold text-sm text-gray-900">Cryptographic E-Sign Pad</h3>
+                  </div>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Interactive HTML5 smooth canvas drawing and typed signature mode. Generates a timestamped token, 
+                    hashes legal terms agreement, and converts Quotations to Confirmed instantly.
+                  </p>
+                  <div className="bg-white p-2.5 rounded border border-teal-200 text-[11px] font-mono text-gray-700">
+                    Token: SIG-2026-SHA256 • IP & Audit Trail Logged
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Link
+                  href="/subscriptions/sub-00101"
+                  className="inline-flex items-center space-x-2 bg-odoo-purple hover:bg-odoo-purple-dark text-white font-bold px-4 py-2 rounded-lg transition text-xs shadow-xs"
+                >
+                  <span>Test Proration on Subscription</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link
+                  href="/portal"
+                  className="inline-flex items-center space-x-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold px-4 py-2 rounded-lg transition text-xs shadow-xs"
+                >
+                  <span>Test Portal E-Sign Flow</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* SECTION 8: GATEWAY SANDBOX & DUNNING AUTO-RECOVERY */}
+          {activeSection === "sandbox_dunning" && (
+            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-xs space-y-6 animate-in fade-in">
+              <div>
+                <span className="text-xs font-bold text-red-600 uppercase tracking-wider bg-red-50 px-2.5 py-1 rounded-md border border-red-200">
+                  Chapter 8
+                </span>
+                <h2 className="text-2xl font-bold text-gray-900 mt-2">
+                  Gateway Webhook Sandbox & Dunning Escalation Engine
+                </h2>
+                <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed">
+                  Test edge-case payment gateway scenarios and automate debt collection across 3 progressive tiers.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="p-4 rounded-xl border border-gray-200 bg-gray-50 space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <Zap className="w-4 h-4 text-purple-600" />
+                    <h3 className="font-bold text-sm text-gray-900">Payment Gateway Sandbox Scenarios</h3>
+                  </div>
+                  <p className="text-xs text-gray-600">
+                    Simulate real Stripe / Adyen / Mollie payment gateways directly from any confirmed invoice:
+                  </p>
+                  <ul className="text-xs text-gray-600 list-disc pl-5 space-y-1">
+                    <li><strong>Instant Success (200 OK):</strong> Immediate capture and real-time balance clearance.</li>
+                    <li><strong>Insufficient Funds (402):</strong> Simulates bank card decline and triggers retry policy.</li>
+                    <li><strong>3D Secure OTP Challenge:</strong> Interactive modal verification simulating two-factor SMS bank challenge.</li>
+                    <li><strong>Fraud Filter Rejection:</strong> High-risk velocity simulation for security testing.</li>
+                  </ul>
+                </div>
+
+                <div className="p-4 rounded-xl border border-red-200 bg-red-50/50 space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <AlertTriangle className="w-4 h-4 text-red-600" />
+                    <h3 className="font-bold text-sm text-gray-900">Automated 3-Tier Dunning Engine</h3>
+                  </div>
+                  <p className="text-xs text-gray-600">
+                    Configurable recovery pipeline with automatic subscription action:
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-xs">
+                    <div className="bg-white p-2.5 rounded border border-yellow-200">
+                      <span className="font-bold text-yellow-800 block">Tier 1 (Day 1-7)</span>
+                      <span className="text-gray-500 text-[11px]">Gentle reminder email + card update link</span>
+                    </div>
+                    <div className="bg-white p-2.5 rounded border border-orange-200">
+                      <span className="font-bold text-orange-800 block">Tier 2 (Day 8-14)</span>
+                      <span className="text-gray-500 text-[11px]">Urgent notice + 7-day grace period countdown</span>
+                    </div>
+                    <div className="bg-white p-2.5 rounded border border-red-200">
+                      <span className="font-bold text-red-800 block">Tier 3 (Day 15+)</span>
+                      <span className="text-red-700 font-bold text-[11px]">Auto-Suspend Subscription + Legal Notice</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Link
+                  href="/dunning"
+                  className="inline-flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-lg transition text-xs shadow-xs"
+                >
+                  <span>Open Dunning Dashboard</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link
+                  href="/invoices/inv-2026-0002"
+                  className="inline-flex items-center space-x-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold px-4 py-2 rounded-lg transition text-xs shadow-xs"
+                >
+                  <span>Test Gateway Sandbox on Invoice</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>

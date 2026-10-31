@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { 
   FileText, CreditCard, Package, Layers, 
-  Percent, ShieldCheck, BarChart3, Users, X
+  Percent, ShieldCheck, BarChart3, Users, X, AlertTriangle 
 } from "lucide-react";
 
 interface AppSwitcherModalProps {
@@ -17,6 +17,7 @@ export function AppSwitcherModal({ isOpen, onClose }: AppSwitcherModalProps) {
   const apps = [
     { name: "Subscriptions", href: "/subscriptions", icon: FileText, color: "bg-purple-600", desc: "Contracts & renewals" },
     { name: "Invoicing", href: "/invoices", icon: CreditCard, color: "bg-teal-600", desc: "Customer bills & payments" },
+    { name: "Dunning Recovery", href: "/dunning", icon: AlertTriangle, color: "bg-red-600", desc: "3-tier grace & auto-suspension" },
     { name: "Products & Variants", href: "/products", icon: Package, color: "bg-blue-600", desc: "Catalog & brand variants" },
     { name: "Price Plans", href: "/plans", icon: Layers, color: "bg-indigo-600", desc: "Intervals & lifecycle rules" },
     { name: "Discounts", href: "/discounts", icon: Percent, color: "bg-emerald-600", desc: "Admin discount rules" },

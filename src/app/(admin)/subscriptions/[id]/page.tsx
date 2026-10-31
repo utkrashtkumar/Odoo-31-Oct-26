@@ -15,8 +15,11 @@ import { formatMoney, formatDate } from "@/lib/utils";
 import { SubscriptionStatus } from "@/types";
 import { 
   Check, Play, Pause, XCircle, RotateCcw, 
-  FileText, ShieldCheck, ToggleLeft, ToggleRight
+  FileText, ShieldCheck, ToggleLeft, ToggleRight,
+  PenTool, Calculator, Sparkles 
 } from "lucide-react";
+import { calculateProration, ProrationCalculation } from "@/lib/proration";
+import { ContractSignModal } from "@/components/portal/ContractSignModal";
 
 export default function SubscriptionDetailPage({ params }: { params: { id: string } }) {
   const sub = initialSubscriptions.find((s) => s.id === params.id) || initialSubscriptions[0];
@@ -24,6 +27,8 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
   const [currentStatus, setCurrentStatus] = useState<SubscriptionStatus>(sub.status);
   const [hasAddon, setHasAddon] = useState(true);
   const [statusMsg, setStatusMsg] = useState<string | null>(null);
+  const [isSignModalOpen, setIsSignModalOpen] = useState(false);
+  const [prorationDetails, setProrationDetails] = useState<ProrationCalculation | null>(null);
 
   const stages: { id: SubscriptionStatus; label: string }[] = [
     { id: "draft", label: "Draft" },
@@ -41,9 +46,31 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
   };
 
   const handleToggleAddon = () => {
-    setHasAddon((prev) => !prev);
-    setStatusMsg(!hasAddon ? "Add-on enabled. Pro-rated billing scheduled." : "Add-on removed.");
-    setTimeout(() => setStatusMsg(null), 3000);
+    const nextState = !hasAddon;
+    setHasAddon(nextState);
+
+    // Calculate smart proration
+    const proration = calculateProration(
+      sub.start_date || new Date().toISOString(),
+      sub.expiry_date || sub.next_billing_date || new Date().toISOString(),
+      new Date(),
+      49.00,
+      nextState
+    );
+    setProrationDetails(proration);
+
+    setStatusMsg(nextState ? `Add-on enabled (+$${proration.proratedAmount.toFixed(2)} prorated charge)` : `Add-on removed (-$${proration.proratedAmount.toFixed(2)} credit)`);
+    setTimeout(() => setStatusMsg(null), 4000);
+  };
+
+  const handleSignSuccess = (signatureData: {
+    signerName: string;
+    signatureType: "drawn" | "typed";
+    signatureToken: string;
+    signedAt: string;
+  }) => {
+    handleStageChange("confirmed");
+    setStatusMsg(`Contract legally e-signed by ${signatureData.signerName} (${signatureData.signatureToken})`);
   };
 
   const lines = sub.lines || [];
@@ -80,6 +107,17 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
                 className="bg-odoo-purple hover:bg-odoo-purple-dark text-white text-xs font-semibold px-3 py-1.5 rounded shadow-xs transition"
               >
                 Send Quotation
+              </button>
+            )}
+
+            {(currentStatus === "quotation" || currentStatus === "draft") && (
+              <button
+                onClick={() => setIsSignModalOpen(true)}
+                className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-1.5 rounded shadow-xs transition flex items-center space-x-1"
+                title="Customer or representative legal electronic signature"
+              >
+                <PenTool className="w-3.5 h-3.5" />
+                <span>✍️ Digital E-Sign</span>
               </button>
             )}
 
@@ -219,6 +257,31 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
             </div>
           </div>
 
+          {/* Proration Breakdown Banner (when toggled) */}
+          {prorationDetails && (
+            <div className="bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-200 p-4 rounded-xl space-y-2 animate-in fade-in">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-xs text-teal-900 flex items-center space-x-1.5">
+                  <Calculator className="w-4 h-4 text-odoo-teal" />
+                  <span>Real-Time Proration Engine (Mid-Cycle Adjustment)</span>
+                </span>
+                <span className="text-[11px] font-mono font-bold bg-white px-2 py-0.5 rounded border border-teal-200 text-teal-800">
+                  {prorationDetails.action === "charge" ? `Prorated Charge: +$${prorationDetails.proratedAmount.toFixed(2)}` : `Prorated Credit: -$${prorationDetails.proratedAmount.toFixed(2)}`}
+                </span>
+              </div>
+              <p className="text-xs text-teal-800 leading-relaxed">
+                {prorationDetails.explanation}
+              </p>
+              <div className="flex items-center space-x-4 text-[11px] text-teal-700 font-mono pt-1">
+                <span>Cycle Span: {prorationDetails.totalDaysInCycle} days</span>
+                <span>•</span>
+                <span>Days Remaining: {prorationDetails.daysRemaining} days</span>
+                <span>•</span>
+                <span>Daily Rate: ${prorationDetails.dailyRate.toFixed(4)}/day</span>
+              </div>
+            </div>
+          )}
+
           {/* Add-on Switchboard Section */}
           <div className="bg-odoo-purple-subtle/50 border border-odoo-purple/20 p-4 rounded-lg flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -320,6 +383,18 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
           entityType="subscription"
           entityId={sub.id}
           initialLogs={initialActivityLogs}
+        />
+
+        {/* Contract E-Sign Modal */}
+        <ContractSignModal
+          isOpen={isSignModalOpen}
+          onClose={() => setIsSignModalOpen(false)}
+          subscriptionNumber={sub.subscription_number}
+          customerName="Marcus Sterling"
+          companyName="Acme Enterprises Inc."
+          totalAmount={totalAmount}
+          planName="Enterprise Software Annual Contract"
+          onSignSuccess={handleSignSuccess}
         />
       </main>
 
