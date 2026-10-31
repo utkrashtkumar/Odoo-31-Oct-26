@@ -36,12 +36,8 @@ export default function SignInPage() {
       if (!data.success) {
         setErrorMsg(data.error || "Authentication failed. Please verify your credentials.");
       } else {
-        signIn(data.user.email, data.user.role, data.user.name);
-        if (data.user.role === "customer") {
-          router.push("/portal");
-        } else {
-          router.push("/dashboard");
-        }
+        signIn(data.user.email, data.user.role, data.user.name, data.user.company);
+        window.location.href = data.user.role === "customer" ? "/portal" : "/dashboard";
       }
     } catch {
       setErrorMsg("Network or server connection error.");

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { 
   LayoutGrid, Search, PlayCircle, 
-  LogOut, LogIn, UserPlus 
+  LogOut, LogIn, UserPlus, BookOpen 
 } from "lucide-react";
 import { AppSwitcherModal } from "./AppSwitcherModal";
 import { useAuth } from "@/lib/auth-context";
@@ -78,6 +78,15 @@ export function Navbar({ currentApp = "Subscriptions" }: NavbarProps) {
               <PlayCircle className={`w-3.5 h-3.5 ${billingRunning ? "animate-spin" : ""}`} />
               <span>{billingRunning ? "Running..." : "⚡ Run Billing Day"}</span>
             </button>
+
+            <Link
+              href="/guide"
+              className="flex items-center space-x-1.5 bg-white/15 hover:bg-white/25 text-white text-xs font-semibold px-2.5 py-1.5 rounded transition border border-white/20 shadow-xs"
+              title="Open step-by-step interactive system guide"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-odoo-teal" />
+              <span className="hidden sm:inline">User Guide</span>
+            </Link>
 
             <button 
               onClick={() => {

@@ -4,17 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import { 
   FileText, CreditCard, ShieldCheck, Download, 
-  ExternalLink, Sparkles, User, LogOut 
+  ExternalLink, Sparkles, User, LogOut, BookOpen 
 } from "lucide-react";
 import { initialSubscriptions, initialInvoices } from "@/lib/data-store";
 import { formatMoney, formatDate, getAgingBucket } from "@/lib/utils";
+import { useAuth } from "@/lib/auth-context";
 
 export default function CustomerPortalPage() {
-  const [customer] = useState({
-    name: "Marcus Sterling",
-    company: "Acme Enterprises Inc.",
-    email: "billing@acmecorp.com",
-  });
+  const { user, signOut } = useAuth();
+  const customer = {
+    name: user?.name || "Marcus Sterling",
+    company: user?.company || "Acme Enterprises Inc.",
+    email: user?.email || "billing@acmecorp.com",
+  };
 
   // Filter only this customer's records (Strict RLS Isolation!)
   const mySubs = initialSubscriptions.filter((s) => s.customer_id === "u-cust-01");
@@ -35,22 +37,37 @@ export default function CustomerPortalPage() {
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
+            <Link
+              href="/guide"
+              className="text-xs text-gray-600 hover:text-odoo-purple font-medium flex items-center space-x-1 bg-gray-50 px-2.5 py-1.5 rounded-lg border border-gray-200"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-odoo-purple" />
+              <span>User Guide</span>
+            </Link>
+
             <Link
               href="/subscriptions"
               className="text-xs text-odoo-purple hover:underline font-semibold flex items-center space-x-1"
             >
-              <span>Staff / Admin View ↗</span>
+              <span>Staff View ↗</span>
             </Link>
 
-            <div className="flex items-center space-x-2 border-l border-gray-200 pl-4 text-xs">
+            <div className="flex items-center space-x-2 border-l border-gray-200 pl-3 text-xs">
               <div className="w-7 h-7 rounded-full bg-odoo-purple/10 text-odoo-purple font-bold flex items-center justify-center">
                 <User className="w-4 h-4" />
               </div>
               <div className="hidden sm:block text-left">
-                <div className="font-bold text-gray-900">{customer.name}</div>
-                <div className="text-[10px] text-gray-400">{customer.company}</div>
+                <div className="font-bold text-gray-900 leading-tight">{customer.name}</div>
+                <div className="text-[10px] text-gray-400 leading-tight">{customer.company}</div>
               </div>
+              <button
+                onClick={signOut}
+                title="Sign out of portal"
+                className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
         </div>

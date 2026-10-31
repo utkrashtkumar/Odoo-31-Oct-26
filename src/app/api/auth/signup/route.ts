@@ -8,8 +8,14 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { email, password, name, company } = body;
 
-    if (!email || !email.includes("@")) {
+    const cleanEmail = email.trim().toLowerCase();
+
+    if (!cleanEmail || !cleanEmail.includes("@")) {
       return NextResponse.json({ success: false, error: "Please enter a valid email address." }, { status: 400 });
+    }
+
+    if (["admin@odoo.com", "sarah.rep@odoo.com", "billing@acmecorp.com"].includes(cleanEmail)) {
+      return NextResponse.json({ success: false, error: "This email is reserved for demo access. Please sign in or use another email." }, { status: 409 });
     }
 
     // Password complexity policy validation:

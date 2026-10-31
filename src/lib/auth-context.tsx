@@ -15,7 +15,7 @@ interface AuthContextType {
   user: AuthUser | null;
   role: UserRole;
   isLoading: boolean;
-  signIn: (email: string, role?: UserRole, name?: string) => void;
+  signIn: (email: string, role?: UserRole, name?: string, company?: string) => void;
   signOut: () => void;
   switchRole: (role: UserRole) => void;
 }
@@ -28,17 +28,33 @@ const defaultAdminUser: AuthUser = {
   company: "Odoo S.A.",
 };
 
+const defaultStaffUser: AuthUser = {
+  id: "u-staff-01",
+  email: "sarah.rep@odoo.com",
+  name: "Sarah Jenkins (Staff)",
+  role: "staff",
+  company: "Odoo S.A.",
+};
+
+const defaultCustomerUser: AuthUser = {
+  id: "u-cust-01",
+  email: "billing@acmecorp.com",
+  name: "Marcus Sterling (Customer)",
+  role: "customer",
+  company: "Acme Enterprises Inc.",
+};
+
 const AuthContext = createContext<AuthContextType>({
-  user: defaultAdminUser,
-  role: "admin",
-  isLoading: false,
+  user: null,
+  role: "customer",
+  isLoading: true,
   signIn: () => {},
   signOut: () => {},
   switchRole: () => {},
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(defaultAdminUser);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -48,63 +64,58 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(JSON.parse(stored));
       }
     } catch {
-      // Ignore
+      // Ignore parse error
     } finally {
       setIsLoading(false);
     }
   }, []);
 
-  const signIn = (email: string, role: UserRole = "customer", name?: string) => {
+  const signIn = (
+    email: string,
+    role: UserRole = "customer",
+    name?: string,
+    company?: string
+  ) => {
     const newUser: AuthUser = {
       id: `u-${Date.now()}`,
       email,
       name: name || email.split("@")[0],
       role,
-      company: role === "customer" ? "Client Business" : "Odoo S.A.",
+      company: company || (role === "customer" ? "Client Business" : "Odoo S.A."),
     };
     setUser(newUser);
     localStorage.setItem("odoo_active_user", JSON.stringify(newUser));
-    document.cookie = `odoo_user=${JSON.stringify(newUser)}; path=/; max-age=604800`;
+    document.cookie = `odoo_user=${encodeURIComponent(JSON.stringify(newUser))}; path=/; max-age=604800`;
   };
 
   const signOut = () => {
     setUser(null);
     localStorage.removeItem("odoo_active_user");
     document.cookie = "odoo_user=; path=/; max-age=0";
-    window.location.href = "/signin";
+    window.location.href = "/";
   };
 
   const switchRole = (newRole: UserRole) => {
     let targetUser: AuthUser;
+    let targetPath = "/dashboard";
+
     if (newRole === "admin") {
       targetUser = defaultAdminUser;
+      targetPath = "/dashboard";
     } else if (newRole === "staff") {
-      targetUser = {
-        id: "u-staff-01",
-        email: "sarah.rep@odoo.com",
-        name: "Sarah Jenkins (Staff)",
-        role: "staff",
-        company: "Odoo S.A.",
-      };
+      targetUser = defaultStaffUser;
+      targetPath = "/subscriptions";
     } else {
-      targetUser = {
-        id: "u-cust-01",
-        email: "billing@acmecorp.com",
-        name: "Marcus Sterling (Customer)",
-        role: "customer",
-        company: "Acme Enterprises Inc.",
-      };
+      targetUser = defaultCustomerUser;
+      targetPath = "/portal";
     }
+
     setUser(targetUser);
     localStorage.setItem("odoo_active_user", JSON.stringify(targetUser));
-    document.cookie = `odoo_user=${JSON.stringify(targetUser)}; path=/; max-age=604800`;
+    document.cookie = `odoo_user=${encodeURIComponent(JSON.stringify(targetUser))}; path=/; max-age=604800`;
     
-    // Redirect customer to portal, staff/admin to dashboard
-    if (newRole === "customer") {
-      window.location.href = "/portal";
-    } else {
-      window.location.href = "/subscriptions";
-    }
+    // Direct clean navigation to target role landing page
+    window.location.href = targetPath;
   };
 
   return (
@@ -126,4 +137,3 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 export function useAuth() {
   return useContext(AuthContext);
 }
-

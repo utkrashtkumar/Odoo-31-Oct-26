@@ -46,8 +46,8 @@ export default function SignUpPage() {
       if (!data.success) {
         setErrorMsg(data.error || "Signup failed. Please try again.");
       } else {
-        signIn(data.user.email, data.user.role, data.user.name);
-        router.push("/portal");
+        signIn(data.user.email, data.user.role, data.user.name, data.user.company);
+        window.location.href = "/portal";
       }
     } catch {
       setErrorMsg("Network error connecting to authentication service.");
