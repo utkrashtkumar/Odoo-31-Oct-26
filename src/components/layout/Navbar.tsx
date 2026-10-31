@@ -52,7 +52,7 @@ export function Navbar({ currentApp = "Subscriptions" }: NavbarProps) {
 
             <Link href="/" className="flex items-center space-x-2">
               <span className="font-bold text-base tracking-tight hover:opacity-90">
-                Brightloop
+                Odoo
               </span>
               <span className="text-white/40">/</span>
               <span className="font-semibold text-sm text-odoo-purple-subtle bg-black/15 px-2 py-0.5 rounded">

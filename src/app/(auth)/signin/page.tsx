@@ -70,10 +70,10 @@ export default function SignInPage() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         {/* Brand App Badge */}
         <div className="w-12 h-12 bg-odoo-purple text-white font-bold rounded-2xl flex items-center justify-center text-xl mx-auto shadow-md">
-          B
+          O
         </div>
         <h2 className="mt-4 text-2xl font-extrabold text-gray-900 tracking-tight">
-          Sign in to Brightloop
+          Sign in to Odoo
         </h2>
         <p className="mt-1 text-xs text-gray-500">
           Secure Enterprise Authentication

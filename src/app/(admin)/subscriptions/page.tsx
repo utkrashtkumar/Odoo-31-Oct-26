@@ -34,7 +34,7 @@ export default function SubscriptionsPage() {
       <Navbar currentApp="Subscriptions" />
 
       <ControlPanel
-        breadcrumbs={[{ label: "Brightloop Subscriptions" }]}
+        breadcrumbs={[{ label: "Odoo Subscriptions" }]}
         newButtonLabel="New Subscription"
         onNewClick={() => {
           window.location.href = "/subscriptions/sub-00101";

@@ -4,24 +4,24 @@ import {
 } from "@/types";
 import { supabaseAdmin } from "./supabase/admin";
 
-// Demo Initial Data for Brightloop Software Subscription Platform:
+// Demo Initial Data for Odoo Subscription Platform:
 // Core software licenses, configurable add-ons, and product variants with surcharges.
 
 export const initialProfiles: Profile[] = [
   {
     id: "u-admin-01",
-    email: "admin@brightloop.io",
+    email: "admin@odoo.com",
     name: "Alex Vance (Admin)",
     role: "admin",
-    company_name: "Brightloop Software Corp",
+    company_name: "Odoo S.A.",
     created_at: new Date().toISOString(),
   },
   {
     id: "u-staff-01",
-    email: "sarah.rep@brightloop.io",
+    email: "sarah.rep@odoo.com",
     name: "Sarah Jenkins (Sales Rep)",
     role: "staff",
-    company_name: "Brightloop Software Corp",
+    company_name: "Odoo S.A.",
     created_at: new Date().toISOString(),
   },
   {
@@ -47,7 +47,7 @@ export const initialProfiles: Profile[] = [
 export const initialProducts: Product[] = [
   {
     id: "prod-01",
-    name: "Brightloop Core ERP License",
+    name: "Odoo Core ERP License",
     type: "software_license",
     sales_price: 120.00,
     cost_price: 35.00,

@@ -201,11 +201,11 @@ export default function StartPage() {
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-bold text-white text-base">
-              B
+              O
             </div>
-            <span className="font-bold text-base sm:text-lg tracking-tight">Brightloop Software</span>
+            <span className="font-bold text-base sm:text-lg tracking-tight">Odoo</span>
             <span className="hidden sm:inline-block text-[11px] bg-black/20 text-odoo-purple-subtle px-2 py-0.5 rounded font-mono">
-              Enterprise Billing Platform
+              Subscriptions & Invoicing
             </span>
           </div>
 
@@ -600,7 +600,7 @@ export default function StartPage() {
 
       {/* Footer */}
       <footer className="border-t border-gray-200 py-4 text-center text-xs text-gray-400 bg-white">
-        <p>Brightloop Subscription Management System • Enterprise Billing & Invoicing</p>
+        <p>Odoo Subscription Management System • Enterprise Billing & Invoicing</p>
       </footer>
     </div>
   );

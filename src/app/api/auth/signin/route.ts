@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     let userId = matchedProfile ? matchedProfile.id : null;
     let userName = matchedProfile ? matchedProfile.name : cleanEmail.split("@")[0];
     let userRole = matchedProfile ? matchedProfile.role : "customer";
-    let companyName = matchedProfile?.company_name || "Brightloop Account";
+    let companyName = matchedProfile?.company_name || "Odoo Account";
 
     // If not in demo list, verify with authentication service
     if (!matchedProfile) {
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       userId = authData.user.id;
       userName = authData.user.user_metadata?.name || cleanEmail.split("@")[0];
       userRole = authData.user.user_metadata?.role || "customer";
-      companyName = authData.user.user_metadata?.company || "Brightloop Customer";
+      companyName = authData.user.user_metadata?.company || "Odoo Customer";
     }
 
     const userData = {
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       user: userData,
     });
 
-    response.cookies.set("brightloop_user", JSON.stringify(userData), {
+    response.cookies.set("odoo_user", JSON.stringify(userData), {
       path: "/",
       maxAge: 60 * 60 * 24 * 7,
       httpOnly: false,

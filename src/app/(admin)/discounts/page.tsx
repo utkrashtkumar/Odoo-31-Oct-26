@@ -58,7 +58,7 @@ export default function DiscountsPage() {
       <Navbar currentApp="Discounts" />
 
       <ControlPanel
-        breadcrumbs={[{ label: "Brightloop Settings", href: "/discounts" }, { label: "Discount Rules Engine" }]}
+        breadcrumbs={[{ label: "Odoo Settings", href: "/discounts" }, { label: "Discount Rules Engine" }]}
         newButtonLabel="New Discount Rule"
         onNewClick={() => setIsModalOpen(true)}
         searchPlaceholder="Search discount code..."

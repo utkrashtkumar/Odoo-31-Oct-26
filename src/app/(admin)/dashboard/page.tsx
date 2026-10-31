@@ -76,7 +76,7 @@ export default function FinanceDashboardPage() {
 
       <ControlPanel
         breadcrumbs={[
-          { label: "Brightloop Apps", href: "/subscriptions" },
+          { label: "Odoo Apps", href: "/subscriptions" },
           { label: "Finance Lead Executive Summary" },
         ]}
         filters={[
@@ -108,7 +108,7 @@ export default function FinanceDashboardPage() {
               </span>
             </div>
             <p className="text-xs text-gray-500 mt-1">
-              Live automated reconciliation answering Brightloop&apos;s 4 core billing questions.
+              Live automated reconciliation answering Odoo&apos;s 4 core billing questions.
             </p>
           </div>
 

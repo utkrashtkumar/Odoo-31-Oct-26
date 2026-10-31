@@ -84,7 +84,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
 
       <ControlPanel
         breadcrumbs={[
-          { label: "Brightloop Invoicing", href: "/invoices" },
+          { label: "Odoo Invoicing", href: "/invoices" },
           { label: inv.invoice_number },
         ]}
         customActions={
@@ -244,7 +244,7 @@ export default function InvoiceDetailPage({ params }: { params: { id: string } }
               <tbody className="divide-y divide-odoo-border">
                 <tr>
                   <td className="px-4 py-3">
-                    <div className="font-bold text-gray-900">Brightloop Core ERP License</div>
+                    <div className="font-bold text-gray-900">Odoo Core ERP License</div>
                     <div className="text-[11px] text-odoo-purple font-semibold">
                       Variant: Brand Edition = Enterprise Edition (+$560 Surcharge)
                     </div>

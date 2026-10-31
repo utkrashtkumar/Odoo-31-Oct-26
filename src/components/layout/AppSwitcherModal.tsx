@@ -37,10 +37,10 @@ export function AppSwitcherModal({ isOpen, onClose }: AppSwitcherModalProps) {
 
         <div className="flex items-center space-x-3 mb-6 pb-4 border-b border-white/10">
           <div className="w-8 h-8 rounded bg-odoo-purple flex items-center justify-center font-bold text-white text-lg">
-            B
+            O
           </div>
           <div>
-            <h2 className="text-xl font-bold tracking-tight">Brightloop Enterprise Apps</h2>
+            <h2 className="text-xl font-bold tracking-tight">Odoo Enterprise Apps</h2>
             <p className="text-xs text-white/50">Unified Subscription & Billing System</p>
           </div>
         </div>
@@ -70,7 +70,7 @@ export function AppSwitcherModal({ isOpen, onClose }: AppSwitcherModalProps) {
         </div>
 
         <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-white/60">
-          <span>Brightloop Software Platform</span>
+          <span>Odoo Enterprise Platform</span>
           <span>Version 1.0</span>
         </div>
       </div>

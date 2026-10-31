@@ -1,7 +1,7 @@
 {
-  "name": "brightloop-subscription-management",
+  "name": "odoo-subscription-management",
   "version": "1.0.0",
-  "description": "Brightloop Subscription Management System - Enterprise Billing and Invoicing",
+  "description": "Odoo Subscription Management System - Enterprise Billing and Invoicing",
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3000",

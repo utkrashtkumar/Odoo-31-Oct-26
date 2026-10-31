@@ -57,7 +57,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
 
       <ControlPanel
         breadcrumbs={[
-          { label: "Brightloop Subscriptions", href: "/subscriptions" },
+          { label: "Odoo Subscriptions", href: "/subscriptions" },
           { label: sub.subscription_number },
         ]}
         customActions={
@@ -269,7 +269,7 @@ export default function SubscriptionDetailPage({ params }: { params: { id: strin
               <tbody className="divide-y divide-odoo-border">
                 <tr className="hover:bg-odoo-canvas">
                   <td className="px-4 py-3">
-                    <div className="font-bold text-gray-900">Brightloop Core ERP License</div>
+                    <div className="font-bold text-gray-900">Odoo Core ERP License</div>
                     <div className="text-[11px] text-odoo-purple font-semibold">
                       Variant: Brand Edition = Enterprise Edition (+$560 Surcharge)
                     </div>

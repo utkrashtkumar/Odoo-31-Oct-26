@@ -63,7 +63,7 @@ export default function ProductsPage() {
       <Navbar currentApp="Products & Variants" />
 
       <ControlPanel
-        breadcrumbs={[{ label: "Brightloop Catalog", href: "/products" }, { label: "Products & Brand Variants" }]}
+        breadcrumbs={[{ label: "Odoo Catalog", href: "/products" }, { label: "Products & Brand Variants" }]}
         newButtonLabel="Add Product"
         onNewClick={() => setIsModalOpen(true)}
         searchPlaceholder="Search product name..."
@@ -171,7 +171,7 @@ export default function ProductsPage() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Brightloop CRM Professional"
+                  placeholder="e.g. Odoo CRM Professional"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full p-2 border border-odoo-border rounded focus:outline-none focus:border-odoo-purple"

@@ -34,7 +34,7 @@ export default function InvoicesPage() {
       <Navbar currentApp="Invoicing" />
 
       <ControlPanel
-        breadcrumbs={[{ label: "Brightloop Invoicing", href: "/invoices" }, { label: "Customer Invoices" }]}
+        breadcrumbs={[{ label: "Odoo Invoicing", href: "/invoices" }, { label: "Customer Invoices" }]}
         newButtonLabel="New Invoice"
         onNewClick={() => {
           window.location.href = "/invoices/inv-2026-0001";

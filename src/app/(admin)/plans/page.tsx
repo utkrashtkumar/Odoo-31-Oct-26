@@ -23,7 +23,7 @@ export default function PlansPage() {
       <Navbar currentApp="Price Plans" />
 
       <ControlPanel
-        breadcrumbs={[{ label: "Brightloop Catalog", href: "/products" }, { label: "Subscription Pricing Plans" }]}
+        breadcrumbs={[{ label: "Odoo Catalog", href: "/products" }, { label: "Subscription Pricing Plans" }]}
         newButtonLabel="Create Plan"
         onNewClick={() => alert("New plan builder opens with lifecycle toggles: intervals, min quantity, auto-close, pause, renew.")}
         searchPlaceholder="Search plans..."

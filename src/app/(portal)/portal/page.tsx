@@ -27,10 +27,10 @@ export default function CustomerPortalPage() {
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 rounded bg-odoo-purple flex items-center justify-center font-bold text-white text-base">
-              B
+              O
             </div>
             <div>
-              <span className="font-bold text-base text-gray-900 tracking-tight">Brightloop Software</span>
+              <span className="font-bold text-base text-gray-900 tracking-tight">Odoo</span>
               <span className="text-xs text-gray-400 ml-2">/ Customer Portal</span>
             </div>
           </div>
@@ -211,7 +211,7 @@ export default function CustomerPortalPage() {
 
       {/* Portal Footer */}
       <footer className="border-t border-gray-200 mt-16 py-6 text-center text-xs text-gray-400">
-        <p>Powered by Brightloop Software • All rights reserved.</p>
+        <p>Powered by Odoo • All rights reserved.</p>
       </footer>
     </div>
   );

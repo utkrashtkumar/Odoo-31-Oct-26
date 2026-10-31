@@ -3,7 +3,7 @@ import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 
 export const metadata: Metadata = {
-  title: "Brightloop - Subscription Management System",
+  title: "Odoo - Subscription Management System",
   description: "Unified recurring billing, subscription management, and revenue platform.",
 };
 

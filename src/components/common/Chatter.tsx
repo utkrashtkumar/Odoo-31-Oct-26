@@ -36,7 +36,7 @@ export function Chatter({
       user: {
         id: "current-user",
         name: "Alex Vance (Staff)",
-        email: "alex@brightloop.io",
+        email: "alex@odoo.com",
         role: "admin",
         created_at: new Date().toISOString(),
       },

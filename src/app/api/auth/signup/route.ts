@@ -79,7 +79,7 @@ export async function POST(req: Request) {
     });
 
     // Set auth cookie
-    response.cookies.set("brightloop_user", JSON.stringify({
+    response.cookies.set("odoo_user", JSON.stringify({
       id: userId,
       email: email.trim().toLowerCase(),
       name: newProfile.name,

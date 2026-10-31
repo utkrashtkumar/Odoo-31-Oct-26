@@ -22,10 +22,10 @@ interface AuthContextType {
 
 const defaultAdminUser: AuthUser = {
   id: "u-admin-01",
-  email: "admin@brightloop.io",
+  email: "admin@odoo.com",
   name: "Alex Vance (Admin)",
   role: "admin",
-  company: "Brightloop Software Corp",
+  company: "Odoo S.A.",
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -43,7 +43,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("brightloop_active_user");
+      const stored = localStorage.getItem("odoo_active_user");
       if (stored) {
         setUser(JSON.parse(stored));
       }
@@ -60,17 +60,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       email,
       name: name || email.split("@")[0],
       role,
-      company: role === "customer" ? "Client Business" : "Brightloop Software",
+      company: role === "customer" ? "Client Business" : "Odoo S.A.",
     };
     setUser(newUser);
-    localStorage.setItem("brightloop_active_user", JSON.stringify(newUser));
-    document.cookie = `brightloop_user=${JSON.stringify(newUser)}; path=/; max-age=604800`;
+    localStorage.setItem("odoo_active_user", JSON.stringify(newUser));
+    document.cookie = `odoo_user=${JSON.stringify(newUser)}; path=/; max-age=604800`;
   };
 
   const signOut = () => {
     setUser(null);
-    localStorage.removeItem("brightloop_active_user");
-    document.cookie = "brightloop_user=; path=/; max-age=0";
+    localStorage.removeItem("odoo_active_user");
+    document.cookie = "odoo_user=; path=/; max-age=0";
     window.location.href = "/signin";
   };
 
@@ -81,10 +81,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } else if (newRole === "staff") {
       targetUser = {
         id: "u-staff-01",
-        email: "sarah.rep@brightloop.io",
+        email: "sarah.rep@odoo.com",
         name: "Sarah Jenkins (Staff)",
         role: "staff",
-        company: "Brightloop Software Corp",
+        company: "Odoo S.A.",
       };
     } else {
       targetUser = {
@@ -96,8 +96,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       };
     }
     setUser(targetUser);
-    localStorage.setItem("brightloop_active_user", JSON.stringify(targetUser));
-    document.cookie = `brightloop_user=${JSON.stringify(targetUser)}; path=/; max-age=604800`;
+    localStorage.setItem("odoo_active_user", JSON.stringify(targetUser));
+    document.cookie = `odoo_user=${JSON.stringify(targetUser)}; path=/; max-age=604800`;
     
     // Redirect customer to portal, staff/admin to dashboard
     if (newRole === "customer") {

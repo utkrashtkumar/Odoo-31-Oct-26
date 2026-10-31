@@ -16,7 +16,7 @@ export default function TaxesPage() {
       <Navbar currentApp="Tax Rules" />
 
       <ControlPanel
-        breadcrumbs={[{ label: "Brightloop Settings", href: "/taxes" }, { label: "Tax Calculation Rules" }]}
+        breadcrumbs={[{ label: "Odoo Settings", href: "/taxes" }, { label: "Tax Calculation Rules" }]}
         newButtonLabel="New Tax Rule"
         onNewClick={() => alert("New tax rule creator opens. Taxes apply automatically on invoice lines.")}
       />
