@@ -1,12 +1,12 @@
 {
   "name": "brightloop-subscription-management",
   "version": "1.0.0",
-  "description": "Brightloop Subscription Management System - Odoo Inspired with Supabase",
+  "description": "Brightloop Subscription Management System - Enterprise Billing and Invoicing",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0 -p 3000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint"
   },
   "dependencies": {
